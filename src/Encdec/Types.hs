@@ -1,10 +1,10 @@
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE KindSignatures #-}
 
-module Encdec.Types (Decoded(..), Encoding(..))  where
+module Encdec.Types (Encoded(..), Encoding(..))  where
 
 import Data.ByteString (ByteString)
 
 data Encoding = Base16 | Base32 | Hex
 
-newtype Decoded (a :: Encoding) = Decoded ByteString
+newtype Encoded (a :: Encoding) = Encoded ByteString

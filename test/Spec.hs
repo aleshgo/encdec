@@ -1,7 +1,7 @@
 {-# LANGUAGE DataKinds #-}
 import Test.Hspec
 import Encdec.Decoder as Decoder
-import Encdec.Types (Decoded(..), Encoding(Base32, Hex)) 
+import Encdec.Types (Encoded(..), Encoding(Base32, Hex))
 
 main :: IO ()
 main = do
@@ -12,7 +12,7 @@ spec :: Spec
 spec = do
   describe "decode" $ do
     it "conform RFC examples" $ do
-      Decoder.decode (Decoded "" :: Decoded 'Base32) `shouldBe` Right ""
-      Decoder.decode (Decoded "MY======" :: Decoded 'Base32) `shouldBe` Right "f"
-      Decoder.decode (Decoded "MZXQ====" :: Decoded 'Base32) `shouldBe` Right "fo"
-      Decoder.decode (Decoded "66" :: Decoded 'Hex) `shouldBe` Right "f"
+      Decoder.decode (Encoded "" :: Encoded 'Base32) `shouldBe` Right ""
+      Decoder.decode (Encoded "MY======" :: Encoded 'Base32) `shouldBe` Right "f"
+      Decoder.decode (Encoded "MZXQ====" :: Encoded 'Base32) `shouldBe` Right "fo"
+      Decoder.decode (Encoded "66" :: Encoded 'Hex) `shouldBe` Right "f"
