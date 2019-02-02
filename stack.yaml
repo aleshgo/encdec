@@ -1,4 +1,5 @@
 resolver: lts-13.5
 packages:
 - .
-extra-deps: []
+extra-deps:
+- sandi-0.4.3
