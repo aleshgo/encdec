@@ -1,0 +1,32 @@
+name:                encdec
+version:             0.1.0.0
+github:              "aleshgo/encdec"
+license:             BSD3
+author:              "Oleksii Zhuravlov"
+maintainer:          "Oleksii Zhuravlov <aleshgo@gmail.com>"
+copyright:           "2019 Oleksii Zhuravlov"
+synopsis:            Data encoding library
+description:         Yet another data encoding decoding library
+category:            Codec, Data
+stability:           Experimental
+
+default-extensions:
+- OverloadedStrings
+
+dependencies:
+- base >= 4.7 && < 5
+
+library:
+  source-dirs: src
+
+tests:
+  encdec-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - encdec
+    - hspec
