@@ -12,6 +12,7 @@ data Encoding
   = Base16
   | Base32
   | Hex
+  | Utc
 
-newtype Encoded (a :: Encoding) =
-  Encoded ByteString
+data Encoded a (e :: Encoding) =
+  Encoded a
