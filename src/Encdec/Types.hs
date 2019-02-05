@@ -12,6 +12,7 @@ data Encoding
 
 newtype Encoded (a :: Encoding) =
   Encoded ByteString
+  deriving (Eq, Show)
 
 data Result a
   = Err ByteString

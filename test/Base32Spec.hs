@@ -3,6 +3,7 @@
 module Base32Spec where
 
 import Encdec.Decoder as Decoder
+import Encdec.Encoder as Encoder
 import Encdec.Types
 import Test.Hspec
 import Data.ByteString (ByteString)
@@ -18,3 +19,13 @@ spec = do
       Decoder.decode (Encoded "MZXW6YQ=" :: Encoded 'Base32) `shouldBe` (Ok "foob" :: Result ByteString)
       Decoder.decode (Encoded "MZXW6YTB" :: Encoded 'Base32) `shouldBe` (Ok "fooba" :: Result ByteString)
       Decoder.decode (Encoded "MZXW6YTBOI======" :: Encoded 'Base32) `shouldBe` (Ok "foobar" :: Result ByteString)
+
+  describe "encode" $ do
+    it "conform RFC examples" $ do
+      Encoder.encode ("" :: ByteString) `shouldBe` (Encoded "" :: Encoded 'Base32)
+      Encoder.encode ("f" :: ByteString) `shouldBe` (Encoded "MY======" :: Encoded 'Base32)
+      Encoder.encode ("fo" :: ByteString) `shouldBe` (Encoded "MZXQ====" :: Encoded 'Base32)
+      Encoder.encode ("foo" :: ByteString) `shouldBe` (Encoded "MZXW6===" :: Encoded 'Base32)
+      Encoder.encode ("foob" :: ByteString) `shouldBe` (Encoded "MZXW6YQ=" :: Encoded 'Base32)
+      Encoder.encode ("fooba" :: ByteString) `shouldBe` (Encoded "MZXW6YTB" :: Encoded 'Base32)
+      Encoder.encode ("foobar" :: ByteString) `shouldBe` (Encoded "MZXW6YTBOI======" :: Encoded 'Base32)
