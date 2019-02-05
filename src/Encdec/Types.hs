@@ -1,10 +1,7 @@
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE KindSignatures #-}
 
-module Encdec.Types
-  ( Encoded(..)
-  , Encoding(..)
-  ) where
+module Encdec.Types where
 
 import Data.ByteString (ByteString)
 
@@ -15,3 +12,17 @@ data Encoding
 
 newtype Encoded (a :: Encoding) =
   Encoded ByteString
+
+data Result a
+  = Err ByteString
+  | Ok a
+  deriving (Eq, Show)
+
+leftToErr :: ByteString -> a -> Result b
+leftToErr = const . Err
+
+infixr 0 <|
+infixl 0 |>
+
+(<|) = ($)
+(|>) = flip ($)
