@@ -18,6 +18,7 @@ dependencies:
 - bytestring
 - sandi
 - hex
+- safe
 
 library:
   source-dirs: src

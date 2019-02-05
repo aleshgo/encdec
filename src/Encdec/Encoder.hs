@@ -7,7 +7,9 @@ module Encdec.Encoder
   ) where
 
 import qualified Codec.Binary.Base32 as Base32
+import qualified Numeric as Num
 import Data.ByteString (ByteString)
+import Data.ByteString.Char8 (pack)
 import Data.Hex as Hex
 import Encdec.Types
 
@@ -19,3 +21,6 @@ instance Encoder ByteString (Encoded 'Base32) where
 
 instance Encoder ByteString (Encoded 'Hex) where
   encode = Encoded . Hex.hex
+
+instance Encoder Int (Encoded 'Hex) where
+  encode = Encoded . pack . flip Num.showHex ""
