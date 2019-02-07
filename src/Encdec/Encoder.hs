@@ -31,8 +31,5 @@ instance Encoder ByteString (Encoded 'Base32) where
 instance Encoder ByteString (Encoded 'Base16) where
   encode = Encoded . Base16.encode
 
-instance Encoder ByteString (Encoded 'Hex) where
-  encode = Encoded . Hex.hex
-
 instance Encoder Int (Encoded 'Hex) where
   encode = Encoded . pack . flip Num.showHex ""

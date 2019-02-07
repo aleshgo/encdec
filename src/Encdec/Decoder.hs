@@ -40,11 +40,6 @@ instance Decoder (Encoded 'Base16) ByteString where
     Base16.decode a
       |> either (leftToErr "Decoding from Base32 to ByteString error") Ok
 
-instance Decoder (Encoded 'Hex) ByteString where
-  decode (Encoded a) =
-    Hex.unhex a
-      |> either (leftToErr "Decoding from Hex to ByteString error") Ok
-
 instance Decoder (Encoded 'Hex) Int where
   decode (Encoded a) =
     unpack a
