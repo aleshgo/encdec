@@ -8,6 +8,7 @@ import Data.ByteString (ByteString)
 data Encoding
   = Base16
   | Base32
+  | Base64
   | Hex
 
 newtype Encoded (a :: Encoding) =
