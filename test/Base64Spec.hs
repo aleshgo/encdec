@@ -4,6 +4,7 @@ module Base64Spec where
 
 import Encdec.Decoder as Decoder
 import Encdec.Encoder as Encoder
+import Encdec.Utils as Utils
 import Encdec.Types
 import Test.Hspec
 import Data.ByteString (ByteString)
@@ -29,3 +30,23 @@ spec = do
       Encoder.encode ("foob" :: ByteString) `shouldBe` (Encoded "Zm9vYg==" :: Encoded 'Base64)
       Encoder.encode ("fooba" :: ByteString) `shouldBe` (Encoded "Zm9vYmE=" :: Encoded 'Base64)
       Encoder.encode ("foobar" :: ByteString) `shouldBe` (Encoded "Zm9vYmFy" :: Encoded 'Base64)
+
+  describe "pad" $ do
+    it "conform examples" $ do
+      Utils.pad (Encoded "" :: Encoded 'Base64) `shouldBe` (Encoded "" :: Encoded 'Base64)
+      Utils.pad (Encoded "Zg" :: Encoded 'Base64) `shouldBe` (Encoded "Zg==" :: Encoded 'Base64)
+      Utils.pad (Encoded "Zm8" :: Encoded 'Base64) `shouldBe` (Encoded "Zm8=" :: Encoded 'Base64)
+      Utils.pad (Encoded "Zm9v" :: Encoded 'Base64) `shouldBe` (Encoded "Zm9v" :: Encoded 'Base64)
+      Utils.pad (Encoded "Zm9vYg" :: Encoded 'Base64) `shouldBe` (Encoded "Zm9vYg==" :: Encoded 'Base64)
+      Utils.pad (Encoded "Zm9vYmE" :: Encoded 'Base64) `shouldBe` (Encoded "Zm9vYmE=" :: Encoded 'Base64)
+      Utils.pad (Encoded "Zm9vYmFy" :: Encoded 'Base64) `shouldBe` (Encoded "Zm9vYmFy" :: Encoded 'Base64)
+
+  describe "unpad" $ do
+    it "conform examples" $ do
+      Utils.unpad (Encoded "" :: Encoded 'Base64) `shouldBe` (Encoded "" :: Encoded 'Base64)
+      Utils.unpad (Encoded "Zg==" :: Encoded 'Base64) `shouldBe` (Encoded "Zg" :: Encoded 'Base64)
+      Utils.unpad (Encoded "Zm8=" :: Encoded 'Base64) `shouldBe` (Encoded "Zm8" :: Encoded 'Base64)
+      Utils.unpad (Encoded "Zm9v" :: Encoded 'Base64) `shouldBe` (Encoded "Zm9v" :: Encoded 'Base64)
+      Utils.unpad (Encoded "Zm9vYg==" :: Encoded 'Base64) `shouldBe` (Encoded "Zm9vYg" :: Encoded 'Base64)
+      Utils.unpad (Encoded "Zm9vYmE=" :: Encoded 'Base64) `shouldBe` (Encoded "Zm9vYmE" :: Encoded 'Base64)
+      Utils.unpad (Encoded "Zm9vYmFy" :: Encoded 'Base64) `shouldBe` (Encoded "Zm9vYmFy" :: Encoded 'Base64)

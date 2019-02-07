@@ -4,6 +4,7 @@ module Base32Spec where
 
 import Encdec.Decoder as Decoder
 import Encdec.Encoder as Encoder
+import Encdec.Utils as Utils
 import Encdec.Types
 import Test.Hspec
 import Data.ByteString (ByteString)
@@ -29,3 +30,23 @@ spec = do
       Encoder.encode ("foob" :: ByteString) `shouldBe` (Encoded "MZXW6YQ=" :: Encoded 'Base32)
       Encoder.encode ("fooba" :: ByteString) `shouldBe` (Encoded "MZXW6YTB" :: Encoded 'Base32)
       Encoder.encode ("foobar" :: ByteString) `shouldBe` (Encoded "MZXW6YTBOI======" :: Encoded 'Base32)
+
+  describe "pad" $ do
+    it "conform examples" $ do
+      Utils.pad (Encoded "" :: Encoded 'Base32) `shouldBe` (Encoded "" :: Encoded 'Base32)
+      Utils.pad (Encoded "MY" :: Encoded 'Base32) `shouldBe` (Encoded "MY======" :: Encoded 'Base32)
+      Utils.pad (Encoded "MZXQ" :: Encoded 'Base32) `shouldBe` (Encoded "MZXQ====" :: Encoded 'Base32)
+      Utils.pad (Encoded "MZXW6" :: Encoded 'Base32) `shouldBe` (Encoded "MZXW6===" :: Encoded 'Base32)
+      Utils.pad (Encoded "MZXW6YQ" :: Encoded 'Base32) `shouldBe` (Encoded "MZXW6YQ=" :: Encoded 'Base32)
+      Utils.pad (Encoded "MZXW6YTB" :: Encoded 'Base32) `shouldBe` (Encoded "MZXW6YTB" :: Encoded 'Base32)
+      Utils.pad (Encoded "MZXW6YTBOI" :: Encoded 'Base32) `shouldBe` (Encoded "MZXW6YTBOI======" :: Encoded 'Base32)
+
+  describe "unpad" $ do
+    it "conform examples" $ do
+      Utils.unpad (Encoded "" :: Encoded 'Base32) `shouldBe` (Encoded "" :: Encoded 'Base32)
+      Utils.unpad (Encoded "MY======" :: Encoded 'Base32) `shouldBe` (Encoded "MY" :: Encoded 'Base32)
+      Utils.unpad (Encoded "MZXQ====" :: Encoded 'Base32) `shouldBe` (Encoded "MZXQ" :: Encoded 'Base32)
+      Utils.unpad (Encoded "MZXW6===" :: Encoded 'Base32) `shouldBe` (Encoded "MZXW6" :: Encoded 'Base32)
+      Utils.unpad (Encoded "MZXW6YQ=" :: Encoded 'Base32) `shouldBe` (Encoded "MZXW6YQ" :: Encoded 'Base32)
+      Utils.unpad (Encoded "MZXW6YTB" :: Encoded 'Base32) `shouldBe` (Encoded "MZXW6YTB" :: Encoded 'Base32)
+      Utils.unpad (Encoded "MZXW6YTBOI======" :: Encoded 'Base32) `shouldBe` (Encoded "MZXW6YTBOI" :: Encoded 'Base32)

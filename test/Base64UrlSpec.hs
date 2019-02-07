@@ -4,6 +4,7 @@ module Base64UrlSpec where
 
 import Encdec.Decoder as Decoder
 import Encdec.Encoder as Encoder
+import Encdec.Utils as Utils
 import Encdec.Types
 import Test.Hspec
 import Data.ByteString (ByteString)
@@ -31,3 +32,23 @@ spec = do
       Encoder.encode ("fooba" :: ByteString) `shouldBe` (Encoded "Zm9vYmE=" :: Encoded 'Base64Url)
       Encoder.encode ("foobar" :: ByteString) `shouldBe` (Encoded "Zm9vYmFy" :: Encoded 'Base64Url)
       Encoder.encode ("\255\239\191" :: ByteString) `shouldBe` (Encoded "_--_" :: Encoded 'Base64Url)
+
+  describe "pad" $ do
+    it "conform examples" $ do
+      Utils.pad (Encoded "" :: Encoded 'Base64Url) `shouldBe` (Encoded "" :: Encoded 'Base64Url)
+      Utils.pad (Encoded "Zg" :: Encoded 'Base64Url) `shouldBe` (Encoded "Zg==" :: Encoded 'Base64Url)
+      Utils.pad (Encoded "Zm8" :: Encoded 'Base64Url) `shouldBe` (Encoded "Zm8=" :: Encoded 'Base64Url)
+      Utils.pad (Encoded "Zm9v" :: Encoded 'Base64Url) `shouldBe` (Encoded "Zm9v" :: Encoded 'Base64Url)
+      Utils.pad (Encoded "Zm9vYg" :: Encoded 'Base64Url) `shouldBe` (Encoded "Zm9vYg==" :: Encoded 'Base64Url)
+      Utils.pad (Encoded "Zm9vYmE" :: Encoded 'Base64Url) `shouldBe` (Encoded "Zm9vYmE=" :: Encoded 'Base64Url)
+      Utils.pad (Encoded "Zm9vYmFy" :: Encoded 'Base64Url) `shouldBe` (Encoded "Zm9vYmFy" :: Encoded 'Base64Url)
+
+  describe "unpad" $ do
+    it "conform examples" $ do
+      Utils.unpad (Encoded "" :: Encoded 'Base64Url) `shouldBe` (Encoded "" :: Encoded 'Base64Url)
+      Utils.unpad (Encoded "Zg==" :: Encoded 'Base64Url) `shouldBe` (Encoded "Zg" :: Encoded 'Base64Url)
+      Utils.unpad (Encoded "Zm8=" :: Encoded 'Base64Url) `shouldBe` (Encoded "Zm8" :: Encoded 'Base64Url)
+      Utils.unpad (Encoded "Zm9v" :: Encoded 'Base64Url) `shouldBe` (Encoded "Zm9v" :: Encoded 'Base64Url)
+      Utils.unpad (Encoded "Zm9vYg==" :: Encoded 'Base64Url) `shouldBe` (Encoded "Zm9vYg" :: Encoded 'Base64Url)
+      Utils.unpad (Encoded "Zm9vYmE=" :: Encoded 'Base64Url) `shouldBe` (Encoded "Zm9vYmE" :: Encoded 'Base64Url)
+      Utils.unpad (Encoded "Zm9vYmFy" :: Encoded 'Base64Url) `shouldBe` (Encoded "Zm9vYmFy" :: Encoded 'Base64Url)
