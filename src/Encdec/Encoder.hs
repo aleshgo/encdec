@@ -6,6 +6,7 @@ module Encdec.Encoder
   ( encode
   ) where
 
+import qualified Codec.Binary.Base64Url as Base64Url
 import qualified Codec.Binary.Base64 as Base64
 import qualified Codec.Binary.Base32 as Base32
 import qualified Numeric as Num
@@ -16,6 +17,9 @@ import Encdec.Types
 
 class Encoder a b where
   encode :: a -> b
+
+instance Encoder ByteString (Encoded 'Base64Url) where
+  encode = Encoded . Base64Url.encode
 
 instance Encoder ByteString (Encoded 'Base64) where
   encode = Encoded . Base64.encode

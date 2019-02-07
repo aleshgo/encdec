@@ -6,6 +6,7 @@ module Encdec.Decoder
   ( decode
   ) where
 
+import qualified Codec.Binary.Base64Url as Base64Url
 import qualified Codec.Binary.Base64 as Base64
 import qualified Codec.Binary.Base32 as Base32
 import Data.ByteString (ByteString)
@@ -17,6 +18,11 @@ import Safe (headMay)
 
 class Decoder a b where
   decode :: a -> Result b
+
+instance Decoder (Encoded 'Base64Url) ByteString where
+  decode (Encoded a) =
+    Base64Url.decode a
+      |> either (leftToErr "Decoding from Base64Url to ByteString error") Ok
 
 instance Decoder (Encoded 'Base64) ByteString where
   decode (Encoded a) =

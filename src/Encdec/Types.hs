@@ -9,6 +9,7 @@ data Encoding
   = Base16
   | Base32
   | Base64
+  | Base64Url
   | Hex
 
 newtype Encoded (a :: Encoding) =
