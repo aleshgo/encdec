@@ -9,6 +9,7 @@ module Encdec.Encoder
 import qualified Codec.Binary.Base64Url as Base64Url
 import qualified Codec.Binary.Base64 as Base64
 import qualified Codec.Binary.Base32 as Base32
+import qualified Codec.Binary.Base16 as Base16
 import qualified Numeric as Num
 import Data.ByteString (ByteString)
 import Data.ByteString.Char8 (pack)
@@ -26,6 +27,9 @@ instance Encoder ByteString (Encoded 'Base64) where
 
 instance Encoder ByteString (Encoded 'Base32) where
   encode = Encoded . Base32.encode
+
+instance Encoder ByteString (Encoded 'Base16) where
+  encode = Encoded . Base16.encode
 
 instance Encoder ByteString (Encoded 'Hex) where
   encode = Encoded . Hex.hex
