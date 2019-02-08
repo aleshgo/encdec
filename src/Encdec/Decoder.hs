@@ -3,6 +3,7 @@
 
 module Encdec.Decoder
   ( decode
+  , Decoder
   ) where
 
 import qualified Codec.Binary.Base64Url as Base64Url
