@@ -11,8 +11,8 @@ data Base64Url
 data Hex
 
 newtype Encoded a =
-  Encoded ByteString
-  deriving (Eq, Show)
+  Encoded { encoded :: ByteString }
+  deriving (Eq, Show, Functor)
 
 data Result a
   = Err ByteString
