@@ -1,6 +1,3 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE FlexibleInstances #-}
-
 module Encdec.Utils where
 
 import Encdec.Types
@@ -25,23 +22,23 @@ unpad' (Encoded a) = a |> BS.reverse . BS.dropWhile (== 61) . BS.reverse |> Enco
 
 -- | Unpad instances
 
-instance Pad 'Base64Url where
+instance Pad Base64Url where
   pad = pad' 4
 
-instance Pad 'Base64 where
+instance Pad Base64 where
   pad = pad' 4
 
-instance Pad 'Base32 where
+instance Pad Base32 where
   pad = pad' 8
 
 
 -- | Unpad instances
 
-instance Unpad 'Base64Url where
+instance Unpad Base64Url where
   unpad = unpad'
 
-instance Unpad 'Base64 where
+instance Unpad Base64 where
   unpad = unpad'
 
-instance Unpad 'Base32 where
+instance Unpad Base32 where
   unpad = unpad'

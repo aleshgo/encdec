@@ -1,19 +1,16 @@
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE KindSignatures #-}
 {-# LANGUAGE DeriveFunctor #-}
 
 module Encdec.Types where
 
 import Data.ByteString (ByteString)
 
-data Encoding
-  = Base16
-  | Base32
-  | Base64
-  | Base64Url
-  | Hex
+data Base16
+data Base32
+data Base64
+data Base64Url
+data Hex
 
-newtype Encoded (a :: Encoding) =
+newtype Encoded a =
   Encoded ByteString
   deriving (Eq, Show)
 
