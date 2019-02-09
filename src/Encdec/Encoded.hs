@@ -1,6 +1,6 @@
 {-# LANGUAGE DeriveFunctor #-}
 
-module Encdec.Types where
+module Encdec.Encoded where
 
 import HuskPrelude
 

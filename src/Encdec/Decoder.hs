@@ -17,7 +17,7 @@ import Data.ByteString.Char8 (unpack)
 import qualified Numeric as Num
 import Safe (headMay)
 
-import Encdec.Types
+import Encdec.Encoded
 import Encdec.Encoding
 
 class Decoder a b where

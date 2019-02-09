@@ -3,7 +3,7 @@ module Encdec.Utils where
 import HuskPrelude
 import qualified Data.ByteString as BS
 
-import Encdec.Types
+import Encdec.Encoded
 import Encdec.Encoding
 
 

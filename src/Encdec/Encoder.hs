@@ -14,7 +14,7 @@ import qualified Codec.Binary.Base16 as Base16
 import qualified Numeric as Num
 import Data.ByteString.Char8 (pack)
 
-import Encdec.Types
+import Encdec.Encoded
 import Encdec.Encoding
 
 class Encoder a b where

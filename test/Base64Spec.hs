@@ -7,7 +7,7 @@ import Test.Hspec
 import Encdec.Decoder as Decoder
 import Encdec.Encoder as Encoder
 import Encdec.Utils as Utils
-import Encdec.Types
+import Encdec.Encoded
 import Encdec.Encoding
 
 spec :: Spec
