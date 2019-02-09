@@ -1,12 +1,14 @@
 module Base64UrlSpec where
 
+import HuskPrelude
+import Data.Result
+import Test.Hspec
+
 import Encdec.Decoder as Decoder
 import Encdec.Encoder as Encoder
 import Encdec.Utils as Utils
 import Encdec.Types
 import Encdec.Encoding
-import Test.Hspec
-import Data.ByteString (ByteString)
 
 spec :: Spec
 spec = do

@@ -1,7 +1,8 @@
 module Encdec.Utils where
 
-import Data.ByteString (ByteString)
+import HuskPrelude
 import qualified Data.ByteString as BS
+
 import Encdec.Types
 import Encdec.Encoding
 

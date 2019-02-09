@@ -1,11 +1,13 @@
 module HexSpec where
 
+import HuskPrelude
+import Data.Result
+import Test.Hspec
+
 import Encdec.Decoder as Decoder
 import Encdec.Encoder as Encoder
 import Encdec.Types
 import Encdec.Encoding
-import Data.ByteString (ByteString)
-import Test.Hspec
 
 spec :: Spec
 spec = do

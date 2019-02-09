@@ -6,6 +6,8 @@ module Encdec.Decoder
   , Decoder
   ) where
 
+import HuskPrelude
+import Data.Result
 import qualified Codec.Binary.Base64Url as Base64Url
 import qualified Codec.Binary.Base64 as Base64
 import qualified Codec.Binary.Base32 as Base32
@@ -14,6 +16,7 @@ import Data.ByteString (ByteString)
 import Data.ByteString.Char8 (unpack)
 import qualified Numeric as Num
 import Safe (headMay)
+
 import Encdec.Types
 import Encdec.Encoding
 
