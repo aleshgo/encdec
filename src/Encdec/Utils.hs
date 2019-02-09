@@ -1,8 +1,9 @@
 module Encdec.Utils where
 
-import Encdec.Types
 import Data.ByteString (ByteString)
 import qualified Data.ByteString as BS
+import Encdec.Types
+import Encdec.Encoding
 
 
 -- | Classes

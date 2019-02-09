@@ -4,12 +4,6 @@ module Encdec.Types where
 
 import Data.ByteString (ByteString)
 
-data Base16
-data Base32
-data Base64
-data Base64Url
-data Hex
-
 newtype Encoded a =
   Encoded { encoded :: ByteString }
   deriving (Eq, Show, Functor)

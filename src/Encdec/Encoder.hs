@@ -14,6 +14,7 @@ import qualified Numeric as Num
 import Data.ByteString (ByteString)
 import Data.ByteString.Char8 (pack)
 import Encdec.Types
+import Encdec.Encoding
 
 class Encoder a b where
   encode :: a -> b

@@ -12,9 +12,10 @@ import qualified Codec.Binary.Base32 as Base32
 import qualified Codec.Binary.Base16 as Base16
 import Data.ByteString (ByteString)
 import Data.ByteString.Char8 (unpack)
-import Encdec.Types
 import qualified Numeric as Num
 import Safe (headMay)
+import Encdec.Types
+import Encdec.Encoding
 
 class Decoder a b where
   decode :: a -> Result b

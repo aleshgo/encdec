@@ -3,6 +3,7 @@ module HexSpec where
 import Encdec.Decoder as Decoder
 import Encdec.Encoder as Encoder
 import Encdec.Types
+import Encdec.Encoding
 import Data.ByteString (ByteString)
 import Test.Hspec
 

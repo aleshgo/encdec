@@ -3,6 +3,7 @@ module Base16Spec where
 import Encdec.Decoder as Decoder
 import Encdec.Encoder as Encoder
 import Encdec.Types
+import Encdec.Encoding
 import Test.Hspec
 import Data.ByteString (ByteString)
 
